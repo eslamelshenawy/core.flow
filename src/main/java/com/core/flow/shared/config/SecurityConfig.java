@@ -1,3 +1,4 @@
+/*
 package com.core.flow.shared.config;
 
 
@@ -48,3 +49,4 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 }
+*/

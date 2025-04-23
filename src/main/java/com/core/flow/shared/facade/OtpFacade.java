@@ -1,19 +1,18 @@
-/*
+
 package com.core.flow.shared.facade;
 
 
 //import com.core.flow.shared.client.OtpClient;
-import com.core.flow.shared.data.dto.VerifyOtpRequest;
+
+import com.core.flow.shared.client.OtpClient;
 import com.core.flow.shared.data.dto.otp.CreateOtpRequest;
 import com.core.flow.shared.data.dto.otp.OtpResponse;
 import com.core.flow.shared.data.dto.otp.OtpValidationRequest;
 import com.core.flow.shared.data.dto.otp.VerifyOtpResponse;
-import com.dgcash.common.authorization.util.CurrentUserThreadLocal;
+import com.dgcash.common.core.components.encryption.AESAlgorithm;
+import com.dgcash.common.core.profile.business.exceptions.InvalidOtpException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import com.dgcash.common.core.profile.business.exceptions.InvalidOtpException;
-
-import java.util.UUID;
 
 import static java.util.Optional.ofNullable;
 
@@ -25,7 +24,7 @@ public class OtpFacade {
     public OtpResponse createOtp(CreateOtpRequest request) {
         request.setNotificationMethod("SMS");
         request.setOperationCode("APPLICATION");
-        request.setEntityId(UUID.randomUUID().toString());
+        request.setEntityId(AESAlgorithm.encrypt(request.getRequesterId().toString()));
         return otpClient.createOtp(request);
     }
 
@@ -37,5 +36,6 @@ public class OtpFacade {
                 .orElseThrow(InvalidOtpException::new);
     }
 
+
 }
-*/
+
