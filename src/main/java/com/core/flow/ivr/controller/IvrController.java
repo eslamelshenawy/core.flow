@@ -17,6 +17,6 @@ public class IvrController {
     @PostMapping("/application-details")
     public ApiResponse<IvrResponse> getApplicationDetails(@RequestBody IvrRequest request) {
         IvrResponse response = ivrService.getApplicationDetails(request);
-        return new ApiResponse<>("SUCCESS", "Application found successfully.", response);
+        return new ApiResponse<IvrResponse>("SUCCESS", "Application found successfully.", response);
     }
 }

@@ -30,5 +30,4 @@ public class IvrService {
             throw new InvalidUserInputException("Invalid phone number or ID number.");
         }
     }
-
 }
