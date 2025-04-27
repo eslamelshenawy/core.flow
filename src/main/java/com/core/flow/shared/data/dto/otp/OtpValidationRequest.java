@@ -6,4 +6,5 @@ public class OtpValidationRequest {
     private String type;
     private String entityId;
     private String mobileNumber;
+    private String lang;
 }

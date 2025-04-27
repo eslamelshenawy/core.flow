@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class VerifyOtpResponse {
-
-    private Boolean isVerified;
+    private String message;
+    private String expiry;
 }

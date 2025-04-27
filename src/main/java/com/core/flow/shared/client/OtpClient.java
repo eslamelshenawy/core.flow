@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 
-@FeignClient(name = "ocetp-servi")
+@FeignClient(name = "otp-service")
 public interface OtpClient {
     @PostMapping("/api/v1/internal/otps")
     OtpResponse createOtp(@RequestBody CreateOtpRequest createOtpRequest);
@@ -19,6 +19,7 @@ public interface OtpClient {
     String generateOtp(@RequestBody CreateOtpRequest createOtpRequest);
 
     @GetMapping("/api/v1/internal/otps/chatbot/entities/{entityId}")
-    Boolean validateEntityIdSession(@RequestParam("type") String type, @PathVariable("userId") String userId);
+    Boolean validateEntityIdSession(@RequestParam("type") String type, @PathVariable("entityId") String entityId);
+
 }
 
