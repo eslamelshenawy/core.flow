@@ -45,9 +45,7 @@ public class ChatbotController {
         if (entityId.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
         }
-
-        // Fetch the list of applications (No pagination applied as per your requirement)
-        List<ApplicationIvrDto> apps = applicationFacade.getApplicationByProfileId(entityId);
+        List<ApplicationIvrDto> apps = applicationFacade.getApplicationByProfileId(entityId,latestOnly);
 
         return ResponseEntity.ok(apps);
     }
