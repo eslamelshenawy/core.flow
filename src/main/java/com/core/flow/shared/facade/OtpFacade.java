@@ -33,7 +33,7 @@ public class OtpFacade {
 
 
     public OtpResponse createOtp(CreateOtpRequest request) {
-        CustomerBasicInfoResponse profile = profileClient.getProfileByPhoneAndId(
+       CustomerBasicInfoResponse profile = profileClient.getProfileByPhoneAndId(
                 SearchByPhoneAndIdRequest.builder()
                         .phoneNumber(request.getMobileNumber())
                         .idNumber(request.getRequesterId().toString())

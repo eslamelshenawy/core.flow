@@ -1,5 +1,6 @@
 package com.core.flow.chatbot.controller;
 
+import com.core.flow.shared.data.dto.application.ApplicationResponse;
 import com.core.flow.shared.data.dto.otp.CreateOtpRequest;
 import com.core.flow.shared.data.dto.otp.OtpResponse;
 import com.core.flow.shared.data.dto.otp.OtpValidationRequest;
@@ -38,18 +39,23 @@ public class ChatbotController {
     }
 
     @GetMapping("/chatbot/get-requests")
-    public ResponseEntity<List<ApplicationIvrDto>> getRequestDetails(
+    public ResponseEntity<ApplicationResponse> getRequestDetails(
             @RequestHeader(value = "X-ENTITY-ID", required = true) String entityId,
-            @RequestParam(name = "latestOnly", required = false, defaultValue = "false") boolean latestOnly) {
+            @RequestParam(name = "latestOnly", required = false, defaultValue = "false") boolean latestOnly,
+            @RequestHeader(name = "Accept-Language", defaultValue = "ar_SA") String lang) {
 
-        if (entityId.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
+        if (entityId == null || entityId.isEmpty()) {
+            ApplicationResponse errorResponse = new ApplicationResponse();
+            errorResponse.setMessage("Missing X-ENTITY-ID header");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
         }
-        List<ApplicationIvrDto> apps = applicationFacade.getApplicationByProfileId(entityId,latestOnly);
 
-        return ResponseEntity.ok(apps);
+        ApplicationResponse response = applicationFacade.getApplicationByProfileId(entityId, latestOnly, lang);
+
+        if (response.getMessage() != null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+
+        return ResponseEntity.ok(response);
     }
-
-
-
 }
