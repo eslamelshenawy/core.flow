@@ -14,6 +14,10 @@ public interface ApplicationClient {
     @PostMapping("/chatbot/applications")
     List<ApplicationIvrDto> getApplicationsByProfileId(@RequestBody SearchByPhoneAndIdRequest request);
 
+    @PostMapping("/ivr/applications")
+    List<ApplicationIvrDto> getApplicationsByPhoneAndId(@RequestBody SearchByPhoneAndIdRequest request);
+
+
 }
 
 
